@@ -75,4 +75,10 @@ new_papr <- function() {
               to = file_to)
   )
 
+  # start version control
+  renv::init()
+  renv::hydrate()
+  renv::update()
+  renv::snapshot()
+  unlink(".Rprofile")
 }
