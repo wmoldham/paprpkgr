@@ -76,7 +76,7 @@ new_papr <- function() {
   )
 
   # start version control
-  renv::init()
+  renv::init(restart = FALSE)
   renv::hydrate()
   renv::update()
   renv::snapshot()
