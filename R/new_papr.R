@@ -30,4 +30,22 @@ new_papr <- function() {
   )
   lapply(paths, function(x) dir.create(x, recursive = TRUE))
 
+  # add files to .gitignore
+  gitignore <- c(
+    "*.html",
+    "inst/analysis/figures",
+    "*.pdf",
+    "*.jpg",
+    "*.ai",
+    "*.tif",
+    "*.log"
+  )
+  usethis::use_git_ignore(gitignore)
+
+  # add files to .Rbuildignore
+  rbuildignore <- c(
+    "^inst/analysis/figures"
+  )
+  usethis::use_build_ignore(rbuildignore, escape = FALSE)
+
 }
