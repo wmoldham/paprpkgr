@@ -1,0 +1,130 @@
+---
+title: "Title"
+subtitle: "`r format(Sys.time(), '%B %d, %Y')`"
+
+author:
+- William M. Oldham: 
+    institute: 1
+    email: woldham@bwh.harvard.edu
+    correspondence: true
+institute:
+- 1: Department of Medicine, Brigham and Women's Hospital and Harvard Medical School, Boston, MA
+
+bibliography: library.bib
+csl: cell-metabolism.csl
+link-citations: yes
+  
+output: 
+  bookdown::pdf_document2:
+    template: template.tex
+    keep_tex: false
+    df_print: kable
+    toc: false
+    number_sections: false
+    latex_engine: xelatex
+    pandoc_args:
+      - '--lua-filter=scholarly-metadata.lua'
+      - '--lua-filter=author-info-blocks.lua'
+      - '--lua-filter=pagebreak.lua'
+compact-title: true
+geometry: margin = 0.75in
+fontsize: 11pt
+mainfont: Calibri
+graphics: yes
+header-includes:
+- \usepackage{lineno}
+- \linenumbers
+- \setlength\linenumbersep{1cm}
+- \usepackage{setspace}
+- \doublespacing
+- \makeatletter\renewcommand*{\fps@figure}{htbp}\makeatother
+- \setlength{\parskip}{0.75\baselineskip plus 2pt minus 2pt}
+vignette: >
+  <!-- %\VignetteIndexEntry{manuscript} -->
+  <!-- %\VignetteEngine{knitr::rmarkdown} -->
+  <!-- %\VignetteEncoding{UTF-8} -->
+---
+
+```{r setup, include = FALSE}
+# library(hypoxia.flux.analysis.1)
+devtools::load_all()
+
+knitr::opts_chunk$set(
+  echo = FALSE, 
+  warning = FALSE, 
+  message = FALSE, 
+  out.width = "80%", 
+  fig.align = "center"
+)
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+knitr::opts_knit$set(kable.force.latex = FALSE)
+
+options(tinytex.verbose = TRUE)
+```
+
+# Summary
+
+# Keywords
+
+\newpage
+
+# Introduction
+
+\newpage
+
+# Results
+
+\newpage
+
+# Discussion
+
+\newpage
+
+# Acknowledgements
+
+# Author Contributions
+
+# Declaration of Interests
+
+\newpage
+
+\newpage
+
+# Figure Legends
+
+(ref:f1) 
+
+Figure 1: (ref:f1)
+
+\newpage
+
+# Tables
+
+\newpage
+
+# Methods
+
+Detailed methods provided in the Supplement.
+
+\newpage
+
+# References
+
+::: {#refs} 
+:::
+
+\newpage
+
+# Figures
+
+```{r f1, fig.cap = "(ref:f1)"}
+# knitr::include_graphics(system.file("manuscript/figures/01-figure.pdf",
+#                                     package = "package"))
+```
+
+\newpage

@@ -1,0 +1,156 @@
+---
+title: "Supplementary materials"
+subtitle: "`r format(Sys.time(), '%B %d, %Y')`"
+
+author:
+- William M. Oldham: 
+    institute: 1
+    email: woldham@bwh.harvard.edu
+    correspondence: true
+institute:
+- 1: Department of Medicine, Brigham and Women's Hospital and Harvard Medical School, Boston, MA
+
+output: 
+  bookdown::pdf_document2:
+    template: template.tex
+    keep_tex: false
+    df_print: kable
+    toc: false
+    number_sections: false
+    latex_engine: xelatex
+    pandoc_args:
+      - '--lua-filter=scholarly-metadata.lua'
+      - '--lua-filter=author-info-blocks.lua'
+      - '--lua-filter=multiple-bibliographies.lua'
+      - '--lua-filter=pagebreak.lua'
+compact-title: true
+geometry: margin = 0.75in
+fontsize: 11pt
+mainfont: Calibri
+graphics: yes
+header-includes:
+- \usepackage{lineno}
+- \linenumbers
+- \setlength\linenumbersep{1cm}
+- \usepackage{setspace}
+- \doublespacing
+- \makeatletter\renewcommand*{\fps@figure}{htbp}\makeatother
+- \setlength{\parskip}{0.75\baselineskip plus 2pt minus 2pt}
+- \usepackage{pdflscape}
+
+bibliography_main: library.bib
+bibliography_software: packages.bib
+csl: cell-metabolism.csl
+link-citations: yes
+nocite: |
+  @R-base, @R-bookdown, @R-broom, @R-cellranger, @R-cowplot, @R-devtools, @R-dplyr, 
+  @R-emmeans, @R-forcats, @R-ggbeeswarm, @R-ggplot2, @R-ggraph, @R-kableExtra, 
+  @R-knitr, @R-lme4, @R-lmerTest, @R-lubridate, @R-magick, @R-magrittr, @R-MASS, 
+  @R-mzrtools, @R-patchwork, @R-pbkrtest, @R-purrr, @R-RColorBrewer, @R-readr, 
+  @R-readxl, @R-renv, @R-rlang, @R-rmarkdown, @R-roxygen2, @R-stringr, @R-tibble, 
+  @R-tidygraph, @R-tidyr, @R-tidyverse, @R-tinytex, @R-usethis, @R-viridis, @R-wmo, 
+  @bookdown2016, @ggplot22016, @knitr2015, @lme42015, @lmerTest2017, @lubridate2011, 
+  @MASS2002, @pbkrtest2014, @rmarkdown2018, @tidyverse2019, tinytex2019
+vignette: >
+  <!-- %\VignetteIndexEntry{manuscript} -->
+  <!-- %\VignetteEngine{knitr::rmarkdown} -->
+  <!-- %\VignetteEncoding{UTF-8} -->
+---
+
+```{r setup, include = FALSE}
+# library(hypoxia.flux.analysis.1)
+library(dplyr)
+devtools::load_all()
+
+knitr::opts_chunk$set(
+  echo = FALSE, 
+  warning = FALSE, 
+  message = FALSE, 
+  out.width = "75%", 
+  fig.align = "center"
+)
+
+knitr::opts_knit$set(kable.force.latex=FALSE)
+
+options(tinytex.verbose = TRUE)
+options(knitr.graphics.auto_pdf = TRUE)
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+
+# kable function
+my_kable <- function(data, ...) {
+  kableExtra::kable(data, booktabs = TRUE, linesep = "", ...) %>% 
+    kableExtra::kable_styling(latex_options = c("HOLD_position"), font_size = 11)
+}
+```
+
+# Methods
+
+__*Chemicals.*__ 
+
+__*Cell culture.*__ 
+
+__*Immunoblot.*__ Cells were washed with one volume of PBS and collected by scraping in PBS. Cell suspensions were centrifuged at 5,000 ×*g* for 5 min at 4 °C. Pellets were lysed in buffer containing Tris 10 mM, pH 7.4, NaCl 150 mM, EDTA 1 mM, EGTA 1 mM, Triton X-100 1% v/v, and NP-40 0.5% v/v containing Halt Protease Inhibitor Cocktail (Thermo). Protein concentrations were determined by BCA Protein Assay (Thermo). Lysates were normalized for protein concentration and subjected to SDS-PAGE separation on stain-free tris-glycine gels (Bio-Rad), imaged with the Chemidoc system (Bio-Rad), transferred to PVDF membranes with the Trans-Blot Turbo transfer system (Bio-Rad), imaged, blocked in 5% blocking buffer (Bio-Rad), blotted in primary and secondary antibodies, and developed using WesternBright ECL (Advansta). Band signal intensity was normalized to total protein per lane as determined from the stain-free gel or membrane images.
+
+```{r antibodies}
+tibble::tribble(
+    ~ Protein, ~ Catalog, ~ Manufacturer, 
+    "HIF-1α", "610958", "BD Biosciences", 
+    "HRP-α-Rabbit IgG", "7074", "Cell Signaling Technologies", 
+    "HRP-α-Mouse IgG", "A4416", "Sigma"
+  ) %>% 
+  my_kable(caption = "Antibodies", align = "lrl")
+```
+
+__*RT-qPCR.*__ Total RNA was isolated from cells with the RNeasy Mini Kit (Qiagen). cDNA was synthesized from 0.25-1.00 ng RNA with the High Capacity cDNA Reverse Transcription Kit (Applied Biosystems). RT-qPCR analysis was performed with an Applied Biosystems 7500 Fast Real Time PCR System with TaqMan Universal PCR Master Mix and pre-designed TaqMan gene expression assays (Life Technologies). Relative expression levels were calculated using the comparative cycle threshold method referenced to *ACTB*. 
+
+```{r pcr-probes}
+tibble::tribble(
+    ~ Gene, ~ ID, 
+    "ACTB", "Hs03023943_g1", 
+    "GLUT1", "Hs00892681_m1", 
+    "LDHA", "Hs00855332_g1"
+  ) %>% 
+  my_kable(caption = "qPCR Probes") %>% 
+  kableExtra::column_spec(1, italic = TRUE)
+```
+
+__*Data analysis.*__ The raw data and annotated analysis code necessary to reproduce this manuscript are contained in an R package research compendium available on figshare. Data analysis, statistical comparisons, and visualization were performed in R [@R-base] using the packages listed below except as noted otherwise above. Experiments included technical and biological replicates as noted above. Outliers were identified using the median absolute deviation approach. Two group comparisons (*e.g.*, 21% *v.* 0.5% oxygen) were performed using Student's *t*-test. Multifactor comparisons (*e.g.*, BAY and oxygen) were performed using linear mixed-effects models with Tukey's *post hoc* testing. Probability values less than 0.05 were considered significant.  
+
+\newpage
+
+# References
+
+::: {#refs_main} 
+:::
+
+## Software
+
+::: {#refs_software} 
+:::
+
+\newpage
+
+# Tables
+         
+\newpage
+
+# Figure legends
+
+(ref:sf1) 
+
+Supplementary Figure 1: (ref:sf1)
+
+\newpage
+
+# Figures
+
+```{r sf1, fig.cap = "(ref:sf1)"}
+# knitr::include_graphics(system.file("manuscript/figures/01-supp-figure.pdf", 
+#                                     package = "package"))
+```
+
+\newpage

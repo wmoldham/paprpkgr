@@ -55,4 +55,24 @@ new_papr <- function() {
     package = "paprpkgr"
   )
 
+  # install manuscript templates
+  file_names <- c(
+    "author-info-blocks.lua",
+    "template.tex",
+    "multiple-bibliographies.lua",
+    "scholarly-metadata.lua",
+    "cell-metabolism.csl",
+    "library.bib",
+    "packages.bib",
+    "manuscript.Rmd",
+    "supplement.Rmd",
+    "pagebreak.lua"
+  )
+  file_from <- paste0("templates/", file_names)
+  file_to <- paste0("inst/manuscript/", file_names)
+  invisible(
+    file.copy(from = system.file(file_from, package = "paprpkgr", mustWork = TRUE),
+              to = file_to)
+  )
+
 }
