@@ -10,7 +10,7 @@ new_papr <- function() {
   usethis::use_template(
     "README.Rmd",
     save_as = "README.Rmd",
-    data = as.package("."),
+    data = devtools::as.package("."),
     ignore = TRUE,
     open = TRUE,
     package = "paprpkgr"
@@ -54,7 +54,7 @@ new_papr <- function() {
   # generate package documentation
   usethis::use_template(
     "pkgname-package.R",
-    save_as = paste0("R/", as.package(".")$package, "-package.R"),
+    save_as = paste0("R/", devtools::as.package(".")$package, "-package.R"),
     package = "paprpkgr"
   )
 
