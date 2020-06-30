@@ -10,7 +10,7 @@ new_papr <- function() {
     data = as.package("."),
     ignore = TRUE,
     open = TRUE,
-    package = as.package(".")$package
+    package = "paprpkgr"
   )
 
   # setup directory structure
@@ -47,5 +47,12 @@ new_papr <- function() {
     "^inst/analysis/figures"
   )
   usethis::use_build_ignore(rbuildignore, escape = FALSE)
+
+  # generate package documentation
+  usethis::use_template(
+    "pkgname-package.R",
+    save_as = paste0("R/", as.package(".")$package, "-package.R"),
+    package = "paprpkgr"
+  )
 
 }
