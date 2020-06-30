@@ -1,3 +1,6 @@
+#' Create a new research compendium
+#'
+#' @export
 new_papr <- function() {
 
   # MIT license to cover code in the package
@@ -74,6 +77,11 @@ new_papr <- function() {
     file.copy(from = system.file(file_from, package = "paprpkgr", mustWork = TRUE),
               to = file_to)
   )
+
+  # install template Makefile
+  invisible(
+    file.copy(from = system.file("templates/Makefile", package = "paprpkgr", mustWork = TRUE),
+              to = "Makefile"))
 
   # start version control
   renv::init(restart = FALSE)
