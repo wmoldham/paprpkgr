@@ -32,6 +32,7 @@ renv::install("wmoldham/paprpkgr")
 2.  Start version control with Git by `usethis::use_git()`.
 3.  Link version control to GitHub by `usethis::use_github()`.
 4.  Restart the session when prompted.
+5.  Run `paprpkgr::new_papr()`.
 
 ## Compendium Development
 
