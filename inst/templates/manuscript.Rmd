@@ -1,6 +1,5 @@
 ---
 title: "Title"
-subtitle: "`r format(Sys.time(), '%B %d, %Y')`"
 
 author:
 - William M. Oldham: 

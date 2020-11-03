@@ -266,7 +266,7 @@ $if(subtitle)$
 $endif$
 
 $if(author)$
-  \author{$for(author)$$author$$sep$, $endfor$}
+  \author{$for(author)$$author$$sep$,\and $endfor$}
 $endif$
 
 $if(date)$
@@ -285,6 +285,13 @@ $endif$
 $for(header-includes)$
 $header-includes$
 $endfor$
+
+\makeatletter
+\def\and{%                  % \begin{tabular}[t]{c}
+  \end{tabular}%
+  \hskip -1em \@plus.17fil
+  \begin{tabular}[t]{c}}    % \end{tabular}
+\makeatother
 
 \begin{document}
 $if(title)$

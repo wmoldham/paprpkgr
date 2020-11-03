@@ -1,6 +1,6 @@
 ---
-title: "Supplementary materials"
-subtitle: "`r format(Sys.time(), '%B %d, %Y')`"
+title: "Title"
+subtitle: "Supplementary Materials"
 
 author:
 - William M. Oldham: 
