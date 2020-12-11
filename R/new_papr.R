@@ -84,9 +84,6 @@ new_papr <- function() {
               to = "Makefile"))
 
   # start version control
-  renv::init(restart = FALSE)
-  renv::hydrate()
-  renv::update()
-  renv::snapshot()
+  renv::init(restart = FALSE, bare = TRUE)
   unlink(".Rprofile")
 }

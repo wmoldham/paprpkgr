@@ -1,6 +1,6 @@
 Package: paprpkgr
 Title: Install personal framework for research compendium
-Version: 0.1.0
+Version: 0.1.0.9000
 Authors@R: 
     person(given = "William",
            family = "Oldham",
