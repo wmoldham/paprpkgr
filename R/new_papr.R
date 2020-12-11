@@ -85,5 +85,8 @@ new_papr <- function() {
 
   # start version control
   renv::init(restart = FALSE, bare = TRUE)
+  renv::hydrate()
+  renv::update()
+  renv::snapshot()
   unlink(".Rprofile")
 }
