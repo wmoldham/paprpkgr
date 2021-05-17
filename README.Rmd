@@ -47,7 +47,7 @@ renv::install("wmoldham/paprpkgr")
 
 1. Edit `README.Rmd` and `DESCRIPTION` files with basic information about your
 project.
-1. Original data goes into the `inst/extdata` folder.
+1. Original data goes into the `data-raw` folder.
 1. Analyze the raw data and generate cleaned data for analysis using Rmarkdown
 files in `inst/analysis/`. Figures from these analyses should be saved in
 `inst/analysis/figures/`.
@@ -55,8 +55,7 @@ files in `inst/analysis/`. Figures from these analyses should be saved in
 appropriately.
 1. Draft the manuscript and supplement using the `Rmd` templates installed in 
 `inst/manususcript/`. 
-1. Edit the `Makefile` to link raw data, analysis scripts, final data, manuscript, 
-and figures. 
+1. Build processing pipeline using the `targets` package.
 
 ## Research Compendium Resources
 

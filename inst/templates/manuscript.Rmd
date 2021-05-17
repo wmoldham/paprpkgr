@@ -9,39 +9,29 @@ author:
 institute:
 - 1: Department of Medicine, Brigham and Women's Hospital and Harvard Medical School, Boston, MA
 
-bibliography: library.bib
+bibliography: 
+- library.bib
+- packages.bib
 csl: cell-metabolism.csl
 link-citations: yes
-  
+
 output: 
-  bookdown::pdf_document2:
-    template: template.tex
-    keep_tex: false
+  bookdown::word_document2:
+    reference_docx: !expr system.file("manuscript", "template.docx", package = "Copeland.2021.hypoxia.flux")
     df_print: kable
-    toc: false
+    fig_caption: true
     number_sections: false
-    latex_engine: xelatex
     pandoc_args:
       - '--lua-filter=scholarly-metadata.lua'
       - '--lua-filter=author-info-blocks.lua'
       - '--lua-filter=pagebreak.lua'
+      # - '--lua-filter=multiple-bibliographies.lua'
+
 compact-title: true
 geometry: margin = 0.75in
 fontsize: 11pt
 mainfont: Calibri
 graphics: yes
-header-includes:
-- \usepackage{lineno}
-- \linenumbers
-- \setlength\linenumbersep{1cm}
-- \usepackage{setspace}
-- \doublespacing
-- \makeatletter\renewcommand*{\fps@figure}{htbp}\makeatother
-- \setlength{\parskip}{0.75\baselineskip plus 2pt minus 2pt}
-vignette: >
-  <!-- %\VignetteIndexEntry{manuscript} -->
-  <!-- %\VignetteEngine{knitr::rmarkdown} -->
-  <!-- %\VignetteEncoding{UTF-8} -->
 ---
 
 ```{r setup, include = FALSE}

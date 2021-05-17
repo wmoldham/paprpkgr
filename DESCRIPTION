@@ -1,6 +1,6 @@
 Package: paprpkgr
 Title: Install personal framework for research compendium
-Version: 0.1.0.9000
+Version: 0.1.1
 Authors@R: 
     person(given = "William",
            family = "Oldham",
@@ -19,4 +19,5 @@ BugReports: https://github.com/wmoldham/paprpkgr/issues
 Imports: 
     usethis,
     renv,
-    devtools
+    devtools,
+    targets
