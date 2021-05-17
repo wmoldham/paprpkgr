@@ -35,14 +35,14 @@ list(
 
   # write manuscript --------------------------------------------------------
 
-  tar_render(
-    manuscript,
-    path = path_to_manuscript("manuscript.Rmd"),
-    output_dir = path_to_manuscript("")
-  ),
-  tar_render(
-    supplement,
-    path = path_to_manuscript("supplement.Rmd"),
-    output_dir = path_to_manuscript("")
-  )
+  # tar_render(
+  #   manuscript,
+  #   path = path_to_manuscript("manuscript.Rmd"),
+  #   output_dir = path_to_manuscript("")
+  # ),
+  # tar_render(
+  #   supplement,
+  #   path = path_to_manuscript("supplement.Rmd"),
+  #   output_dir = path_to_manuscript("")
+  # )
 )
