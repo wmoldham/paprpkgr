@@ -4,7 +4,6 @@
 # paprpkgr
 
 <!-- badges: start -->
-
 <!-- badges: end -->
 
 The goal of **paprpkgr** is to generate a skeleton to develop a research
@@ -38,7 +37,7 @@ renv::install("wmoldham/paprpkgr")
 
 1.  Edit `README.Rmd` and `DESCRIPTION` files with basic information
     about your project.
-2.  Original data goes into the `inst/extdata` folder.
+2.  Original data goes into the `data-raw` folder.
 3.  Analyze the raw data and generate cleaned data for analysis using
     Rmarkdown files in `inst/analysis/`. Figures from these analyses
     should be saved in `inst/analysis/figures/`.
@@ -46,8 +45,7 @@ renv::install("wmoldham/paprpkgr")
     documented appropriately.
 5.  Draft the manuscript and supplement using the `Rmd` templates
     installed in `inst/manususcript/`.
-6.  Edit the `Makefile` to link raw data, analysis scripts, final data,
-    manuscript, and figures.
+6.  Build processing pipeline using the `targets` package.
 
 ## Research Compendium Resources
 
@@ -55,16 +53,16 @@ Many others have thought much more deeply about the hows and whys of
 using R packages in service of reproducible research efforts. I took my
 inspiration from their efforts:
 
-  - Ben Marwick and his [rrtools](https://github.com/benmarwick/rrtools)
+-   Ben Marwick and his [rrtools](https://github.com/benmarwick/rrtools)
     package
-  - Francisco Rodriguez-Sanchez and his
+-   Francisco Rodriguez-Sanchez and his
     [template](https://github.com/Pakillo/template) package
-  - Carl Boettiger and his
+-   Carl Boettiger and his
     [template](https://github.com/cboettig/template) package
-  - Jeff Hollister and his
+-   Jeff Hollister and his
     [manuscriptPackage](https://github.com/jhollist/manuscriptPackage)
-  - Robert Flight:
+-   Robert Flight:
     <http://rmflight.github.io/posts/2014/07/analyses_as_packages.html>
-  - <https://github.com/ropensci/rrrpkg>
-  - <https://github.com/Reproducible-Science-Curriculum/rr-init>
-  - <http://ropensci.github.io/reproducibility-guide/>
+-   <https://github.com/ropensci/rrrpkg>
+-   <https://github.com/Reproducible-Science-Curriculum/rr-init>
+-   <http://ropensci.github.io/reproducibility-guide/>

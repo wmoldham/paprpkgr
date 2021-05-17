@@ -21,22 +21,25 @@ new_papr <- function() {
     # data gets cleaned data as R objects used to generate manuscript figures
     "data",
 
-    # similar to the data-raw directory with standard package naming convention
-    "inst/extdata",
+    # raw data goes here
+    "data-raw",
 
-    # plan to have analysis folder installed with the package
-    "inst/analysis/figures",
-    "inst/analysis/pdfs",
+    # top-level analysis
+    "analysis/figures",
+    "analysis/pdfs",
 
     # will write the manuscript here
-    "inst/manuscript/figures"
+    "manuscript/figures",
+
+    # targets functions go here
+    "functions"
   )
   lapply(paths, function(x) dir.create(x, recursive = TRUE))
 
   # add files to .gitignore
   gitignore <- c(
     "*.html",
-    "inst/analysis/figures",
+    "analysis/figures",
     "*.pdf",
     "*.jpg",
     "*.ai",
@@ -47,7 +50,7 @@ new_papr <- function() {
 
   # add files to .Rbuildignore
   rbuildignore <- c(
-    "^inst/analysis/figures"
+    "^analysis/figures"
   )
   usethis::use_build_ignore(rbuildignore, escape = FALSE)
 
@@ -61,27 +64,33 @@ new_papr <- function() {
   # install manuscript templates
   file_names <- c(
     "author-info-blocks.lua",
-    "template.tex",
     "multiple-bibliographies.lua",
     "scholarly-metadata.lua",
+    "pagebreak.lua",
+    "template.docx",
+
     "cell-metabolism.csl",
     "library.bib",
     "packages.bib",
+
     "manuscript.Rmd",
-    "supplement.Rmd",
-    "pagebreak.lua"
+    "supplement.Rmd"
   )
   file_from <- paste0("templates/", file_names)
-  file_to <- paste0("inst/manuscript/", file_names)
+  file_to <- paste0("manuscript/", file_names)
   invisible(
-    file.copy(from = system.file(file_from, package = "paprpkgr", mustWork = TRUE),
-              to = file_to)
+    file.copy(
+      from = system.file(file_from, package = "paprpkgr", mustWork = TRUE),
+      to = file_to)
   )
 
-  # install template Makefile
+  # copy analysis template
   invisible(
-    file.copy(from = system.file("templates/Makefile", package = "paprpkgr", mustWork = TRUE),
-              to = "Makefile"))
+    file.copy(
+      from = system.file("templates/analysis.Rmd", package = "paprpkgr", mustWork = TRUE),
+      to = "analysis/"
+    )
+  )
 
   # start version control
   renv::init(restart = FALSE, bare = TRUE)
@@ -89,4 +98,27 @@ new_papr <- function() {
   renv::update()
   renv::snapshot()
   unlink(".Rprofile")
+
+  # copy over utility scripts
+  invisible(
+    file.copy(
+      from = system.file("templates/utils.R", package = "paprpkgr", mustWork = TRUE),
+      to = "functions/"
+    )
+  )
+  invisible(
+    file.copy(
+      from = system.file("templates/utilities.R", package = "paprpkgr", mustWork = TRUE),
+      to = "R/"
+    )
+  )
+
+  # start targets
+  invisible(
+    file.copy(
+      from = system.file("templates/_targets.R", package = "paprpkgr", mustWork = TRUE),
+      to = "."
+    )
+  )
+  targets::tar_renv()
 }
