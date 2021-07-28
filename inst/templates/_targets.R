@@ -1,12 +1,15 @@
-# _targets.R
-
 # setup -------------------------------------------------------------------
 
 devtools::load_all()
 library(targets)
 library(tarchetypes)
 
-src()
+invisible(
+  lapply(
+    list.files(path = "R", pattern = "\\.R$", full.names = TRUE),
+    source
+  )
+)
 
 conflicted::conflict_prefer("filter", "dplyr")
 
@@ -15,19 +18,15 @@ options(
   usethis.quiet = TRUE
 )
 
-future::plan(future::multisession(workers = future::availableCores() - 1))
+future::plan(future.callr::callr(workers = future::availableCores() - 1))
 
 # target-specific options
 tar_option_set(
   packages = c("tidyverse", "patchwork"),
+  # packages = c("tidyverse", "patchwork", "xcms"),
   # imports = c("rnaseq.lf.hypoxia.molidustat"),
   format = "qs"
 )
-
-# plot setup
-# clrs <- c(RColorBrewer::brewer.pal(4, "Set1")[1:4], "#08306b")
-# names(clrs) <- c("21%", "0.5%", "DMSO", "BAY", "0.2%")
-
 
 # list of targets ---------------------------------------------------------
 

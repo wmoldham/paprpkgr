@@ -17,7 +17,7 @@ link-citations: yes
 
 output: 
   bookdown::word_document2:
-    reference_docx: !expr system.file("manuscript", "template.docx", package = "Copeland.2021.hypoxia.flux")
+    reference_docx: !expr system.file("manuscript", "template.docx", package = "X")
     df_print: kable
     fig_caption: true
     number_sections: false
@@ -35,7 +35,7 @@ graphics: yes
 ---
 
 ```{r setup, include = FALSE}
-# library(hypoxia.flux.analysis.1)
+# library(X)
 devtools::load_all()
 
 knitr::opts_chunk$set(
@@ -43,7 +43,8 @@ knitr::opts_chunk$set(
   warning = FALSE, 
   message = FALSE, 
   out.width = "80%", 
-  fig.align = "center"
+  fig.align = "center",
+  out.extra = ""
 )
 
 knitr::opts_chunk$set(
@@ -54,6 +55,12 @@ knitr::opts_chunk$set(
 knitr::opts_knit$set(kable.force.latex = FALSE)
 
 options(tinytex.verbose = TRUE)
+
+# targets::tar_load(
+#   c(
+#     m1_figure
+#   )
+# )
 ```
 
 # Summary
@@ -86,9 +93,9 @@ options(tinytex.verbose = TRUE)
 
 # Figure Legends
 
-(ref:f1) 
+(ref:m1) 
 
-Figure 1: (ref:f1)
+Figure 1: (ref:m1)
 
 \newpage
 
@@ -111,9 +118,13 @@ Detailed methods provided in the Supplement.
 
 # Figures
 
-```{r f1, fig.cap = "(ref:f1)"}
-# knitr::include_graphics(system.file("manuscript/figures/01-figure.pdf",
-#                                     package = "package"))
+```{r m1, fig.cap = "(ref:m1)"}
+knitr::include_graphics(
+  system.file(
+    "manuscript/figures/m1.pdf",
+    package = "X"
+  )
+)
 ```
 
 \newpage

@@ -38,6 +38,7 @@ new_papr <- function() {
 
   # add files to .gitignore
   gitignore <- c(
+    "_targets",
     "*.html",
     "analysis/figures",
     "*.pdf",
@@ -102,13 +103,7 @@ new_papr <- function() {
   # copy over utility scripts
   invisible(
     file.copy(
-      from = system.file("templates/utils.R", package = "paprpkgr", mustWork = TRUE),
-      to = "functions/"
-    )
-  )
-  invisible(
-    file.copy(
-      from = system.file("templates/utilities.R", package = "paprpkgr", mustWork = TRUE),
+      from = system.file("templates/1_utils.R", package = "paprpkgr", mustWork = TRUE),
       to = "R/"
     )
   )
@@ -120,5 +115,4 @@ new_papr <- function() {
       to = "."
     )
   )
-  targets::tar_renv()
 }

@@ -20,4 +20,6 @@ Imports:
     usethis,
     renv,
     devtools,
-    targets
+    targets,
+    tarchetypes,
+    qs
