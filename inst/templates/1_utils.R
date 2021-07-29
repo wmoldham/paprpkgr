@@ -1,7 +1,5 @@
 # utils.R
 
-# %nin% -------------------------------------------------------------------
-
 #' Negate %in%
 #'
 #' Binary operator that returns a logical vector returning `TRUE` if there is
@@ -14,8 +12,6 @@
   match(x, table, nomatch = 0L) == 0L
 }
 
-# path_to_data ------------------------------------------------------------
-
 path_to_data <- function(nm) {
   dir(
     path = "data-raw/",
@@ -27,20 +23,13 @@ path_to_data <- function(nm) {
   )
 }
 
-# path_to_reports ---------------------------------------------------------
-
 path_to_reports <- function(nm) {
   stringr::str_c("analysis/", nm)
 }
 
-
-# path_to_manuscript ------------------------------------------------------
-
 path_to_manuscript <- function(nm) {
   stringr::str_c("manuscript/", nm)
 }
-
-# path_to_plots -----------------------------------------------------------
 
 path_to_plots <- function(nm) {
   path <- stringr::str_c("analysis/figures/", nm)
@@ -53,15 +42,11 @@ path_to_plots <- function(nm) {
 
 }
 
-# read_multi_excel --------------------------------------------------------
-
 read_multi_excel <- function(excel_file) {
   sheets <- readxl::excel_sheets(excel_file)
   purrr::map(sheets, ~readxl::read_excel(excel_file, sheet = .x)) %>%
     rlang::set_names(sheets)
 }
-
-# clean_technical_replicates ----------------------------------------------
 
 clean_technical_replicates <- function(tbl) {
   tidyr::pivot_longer(
@@ -77,8 +62,6 @@ clean_technical_replicates <- function(tbl) {
     dplyr::summarise(value = mean(.data$value, na.rm = TRUE)) %>%
     dplyr::ungroup()
 }
-
-# make_std_curves ---------------------------------------------------------
 
 make_std_curves <- function(df, fo = NULL) {
 
@@ -106,8 +89,6 @@ make_std_curves <- function(df, fo = NULL) {
       )
     )
 }
-
-# make_std_plots ----------------------------------------------------------
 
 make_std_plots <- function(df, title = NULL) {
   ggplot2::ggplot(df) +
@@ -140,8 +121,6 @@ make_std_plots <- function(df, title = NULL) {
     )
 }
 
-# interp_data -------------------------------------------------------------
-
 interp_data <- function(tbl, std) {
   tbl %>%
     dplyr::filter(is.na(.data$conc)) %>%
@@ -153,8 +132,6 @@ interp_data <- function(tbl, std) {
     tidyr::unnest(c(.data$data, .data$conc)) %>%
     dplyr::select(-c(.data$model, .data$value))
 }
-
-# interpolate -------------------------------------------------------------
 
 interpolate <- function(new_df, model) {
   x <- stats::model.frame(model)[[deparse(model$terms[[3]])]]
@@ -168,8 +145,6 @@ interpolate <- function(new_df, model) {
   }))
   new_x
 }
-
-# print_plots -------------------------------------------------------------
 
 print_plots <- function(
   plot_list,
@@ -195,11 +170,7 @@ print_plots <- function(
   invisible(path)
 }
 
-# annot_p -----------------------------------------------------------------
-
 annot_p <- function(num) dplyr::if_else(num < 0.05, "*", NA_character_)
-
-# reverse_log_trans -------------------------------------------------------
 
 reverselog_trans <- function(base = exp(1)) {
   trans <- function(x) -log(x, base)
