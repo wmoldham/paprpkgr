@@ -29,10 +29,7 @@ new_papr <- function() {
     "analysis/pdfs",
 
     # will write the manuscript here
-    "manuscript/figures",
-
-    # targets functions go here
-    "functions"
+    "manuscript/figures"
   )
   lapply(paths, function(x) dir.create(x, recursive = TRUE))
 
@@ -62,7 +59,13 @@ new_papr <- function() {
     package = "paprpkgr"
   )
 
-  # install manuscript templates
+  # start renv
+  renv::init(restart = FALSE, bare = TRUE)
+  renv::hydrate()
+  renv::update()
+  renv::snapshot()
+  unlink(".Rprofile")
+
   file_names <- c(
     "author-info-blocks.lua",
     "multiple-bibliographies.lua",
@@ -77,42 +80,19 @@ new_papr <- function() {
     "manuscript.Rmd",
     "supplement.Rmd"
   )
-  file_from <- paste0("templates/", file_names)
-  file_to <- paste0("manuscript/", file_names)
+  copy_files(file_names, "manuscript")
+  copy_files("analysis.Rmd", "analysis")
+  copy_files(c("1_utils.R", "1_figures.R"), "R")
+  copy_files("_targets.R", ".")
+}
+
+copy_files <- function(nm, to) {
+  file_from <- paste0("templates/", nm)
+  file_to <- paste0(to, "/", nm)
   invisible(
     file.copy(
       from = system.file(file_from, package = "paprpkgr", mustWork = TRUE),
-      to = file_to)
-  )
-
-  # copy analysis template
-  invisible(
-    file.copy(
-      from = system.file("templates/analysis.Rmd", package = "paprpkgr", mustWork = TRUE),
-      to = "analysis/"
-    )
-  )
-
-  # start version control
-  renv::init(restart = FALSE, bare = TRUE)
-  renv::hydrate()
-  renv::update()
-  renv::snapshot()
-  unlink(".Rprofile")
-
-  # copy over utility scripts
-  invisible(
-    file.copy(
-      from = system.file("templates/1_utils.R", package = "paprpkgr", mustWork = TRUE),
-      to = "R/"
-    )
-  )
-
-  # start targets
-  invisible(
-    file.copy(
-      from = system.file("templates/_targets.R", package = "paprpkgr", mustWork = TRUE),
-      to = "."
+      to = file_to
     )
   )
 }
