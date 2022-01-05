@@ -43,5 +43,6 @@ list(
   #   supplement,
   #   path = path_to_manuscript("supplement.Rmd"),
   #   output_dir = path_to_manuscript("")
-  # )
+  # ),
+  NULL
 )
