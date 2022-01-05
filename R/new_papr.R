@@ -60,9 +60,17 @@ new_papr <- function() {
   )
 
   # start renv
+  pkgs <- c(
+    "qs",
+    "rmarkdown",
+    "bookdown",
+    "patchwork",
+    "tidyverse",
+    "targets",
+    "tarchetypes"
+  )
   renv::init(restart = FALSE, bare = TRUE)
-  renv::hydrate()
-  renv::update()
+  renv::install(pkgs)
   renv::snapshot()
   unlink(".Rprofile")
 
