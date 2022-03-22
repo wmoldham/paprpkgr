@@ -2,15 +2,16 @@
 title: "Title"
 
 author:
-- William M. Oldham: 
-    institute: 1
-    email: woldham@bwh.harvard.edu
+- William M. Oldham:
+    institute: bwh
     correspondence: true
+    email: woldham@bwh.harvard.edu
+    
 institute:
-- 1: Department of Medicine, Brigham and Women's Hospital and Harvard Medical School, Boston, MA
+- bwh: Department of Medicine, Brigham and Women's Hospital and Harvard Medical School, Boston, MA
 
 bibliography: 
-- library.bib
+- library.json
 - packages.bib
 csl: cell-metabolism.csl
 link-citations: yes
@@ -43,7 +44,6 @@ knitr::opts_chunk$set(
   warning = FALSE, 
   message = FALSE, 
   out.width = "80%", 
-  fig.align = "center",
   out.extra = ""
 )
 
@@ -56,11 +56,11 @@ knitr::opts_knit$set(kable.force.latex = FALSE)
 
 options(tinytex.verbose = TRUE)
 
-# targets::tar_load(
-#   c(
-#     m1_figure
-#   )
-# )
+targets::tar_load(
+  c(
+    m1_figure, 
+  )
+)
 ```
 
 # Summary
@@ -93,9 +93,27 @@ options(tinytex.verbose = TRUE)
 
 # Figure Legends
 
-(ref:m1) 
+(ref:m1) **Caption.** Info.
 
-Figure 1: (ref:m1)
+```{r}
+figs <- 
+  list.files(
+    system.file(
+      "manuscript/figures", 
+      package = "package"
+    ), 
+    pattern = "m\\d{1}\\.png"
+  ) %>% 
+  rlang::set_names(stringr::str_extract(., "^.*(?=\\.png)"))
+```
+
+```{r results = "asis"}
+out <- 
+  purrr::imap(
+    figs, 
+    ~ cat("Figure ", stringr::str_extract(.y, "\\d"), ": (ref:", .y, ")\n\n", sep = "")
+  )
+```
 
 \newpage
 
@@ -104,8 +122,6 @@ Figure 1: (ref:m1)
 \newpage
 
 # Methods
-
-Detailed methods provided in the Supplement.
 
 \newpage
 
@@ -121,8 +137,8 @@ Detailed methods provided in the Supplement.
 ```{r m1, fig.cap = "(ref:m1)"}
 knitr::include_graphics(
   system.file(
-    "manuscript/figures/m1.pdf",
-    package = "X"
+    "manuscript/figures/m1.png",
+    package = "package"
   )
 )
 ```
