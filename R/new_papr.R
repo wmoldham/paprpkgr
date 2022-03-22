@@ -67,7 +67,8 @@ new_papr <- function() {
     "patchwork",
     "tidyverse",
     "targets",
-    "tarchetypes"
+    "tarchetypes",
+    "ragg"
   )
   renv::init(restart = FALSE, bare = TRUE)
   renv::install(pkgs)
