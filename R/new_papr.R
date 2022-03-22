@@ -83,7 +83,7 @@ new_papr <- function() {
     "template.docx",
 
     "cell-metabolism.csl",
-    "library.bib",
+    "library.json",
     "packages.bib",
 
     "manuscript.Rmd",
