@@ -1,6 +1,7 @@
 # paprpkgr (development version)
 
 * Have `new_papr` install common packages into local renv library.
+* Update process for rendering manuscript and supplement with new support files.
 
 # paprpkgr 0.1.2
 
