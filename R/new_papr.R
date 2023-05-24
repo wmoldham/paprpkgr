@@ -25,11 +25,11 @@ new_papr <- function() {
     "data-raw",
 
     # top-level analysis
-    "analysis/figures",
-    "analysis/pdfs",
+    "analysis",
 
     # will write the manuscript here
-    "manuscript/figures"
+    "manuscript/figs",
+    "manuscript/figs-raw"
   )
   lapply(paths, function(x) dir.create(x, recursive = TRUE))
 
@@ -37,18 +37,20 @@ new_papr <- function() {
   gitignore <- c(
     "_targets",
     "*.html",
-    "analysis/figures",
+    "*.png",
+    "*.scn",
     "*.pdf",
     "*.jpg",
     "*.ai",
     "*.tif",
-    "*.log"
+    "*.log",
+    "*.mzML"
   )
   usethis::use_git_ignore(gitignore)
 
   # add files to .Rbuildignore
   rbuildignore <- c(
-    "^analysis/figures"
+    "^manuscript/figs"
   )
   usethis::use_build_ignore(rbuildignore, escape = FALSE)
 
@@ -75,23 +77,19 @@ new_papr <- function() {
   renv::snapshot()
   unlink(".Rprofile")
 
+  lapply(pkgs, usethis::use_package)
+
   file_names <- c(
     "author-info-blocks.lua",
-    "multiple-bibliographies.lua",
     "scholarly-metadata.lua",
-    "pagebreak.lua",
     "template.docx",
-
     "cell-metabolism.csl",
-    "library.json",
-    "packages.bib",
-
-    "manuscript.Rmd",
-    "supplement.Rmd"
+    "manuscript.qmd",
+    "supplement.qmd"
   )
   copy_files(file_names, "manuscript")
-  copy_files("analysis.Rmd", "analysis")
-  copy_files(c("1_utils.R", "1_figures.R"), "R")
+  copy_files("analysis.qmd", "analysis")
+  copy_files(c("utils.R", "figures.R"), "R")
   copy_files("_targets.R", ".")
 }
 

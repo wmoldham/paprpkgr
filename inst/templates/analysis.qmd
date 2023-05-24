@@ -1,0 +1,30 @@
+---
+title: "Title"
+date-modified: today
+format: html
+excecute:
+  message: false
+---
+
+```{r}
+#| label: setup
+#| output: false
+
+devtools::load_all()
+suppressPackageStartupMessages({
+  library(tidyverse)
+  library(targets)
+})
+
+here::i_am("analysis/analysis.qmd")
+```
+
+```{r}
+#| label: data
+
+# withr::with_dir(here::here(), {
+# 
+# })
+```
+
+## Overview

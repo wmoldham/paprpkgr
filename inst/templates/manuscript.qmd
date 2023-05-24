@@ -1,0 +1,115 @@
+---
+title: "Title"
+
+author:
+- William M. Oldham:
+    institute: bwh, hms
+    correspondence: true
+    email: woldham@bwh.harvard.edu
+    
+institute:
+- bwh: Department of Medicine, Brigham and Women's Hospital, Boston, MA 02115, U.S.A.
+- hms: Department of Medicine, Harvard Medical School, Boston, MA 02115, U.S.A.
+
+format:
+  docx:
+    reference-doc:  template.docx
+    page-width: 7.5
+    output-file: manuscript.docx
+    fig-align: center
+    
+bibliography: 
+- library.bib
+- pkgs.bib
+csl: cell-metabolism.csl
+
+crossref: 
+  fig-title: ""
+  title-delim: ""
+
+filters:
+- scholarly-metadata.lua
+- author-info-blocks.lua
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+# ensure refs are up-to-date
+targets::tar_load(refs)
+targets::tar_load(pkg_citations)
+
+# load data for paper
+# resources <- targets::tar_read(resources_table)
+
+# ensure figures are up-to-date
+# targets::tar_load(
+#   c(
+#     
+#   )
+# )
+```
+
+\newpage
+
+# Abstract 
+
+
+
+# Keywords
+
+
+
+\newpage
+
+# Introduction
+
+
+
+\newpage
+
+# Results
+
+
+
+\newpage
+
+# Discussion
+
+
+
+\newpage
+
+# Materials and Methods
+
+
+
+\newpage
+
+# Acknowledgements
+
+
+
+# Conflict of interest
+
+
+
+\newpage
+
+# References
+
+::: {#refs}
+:::
+
+\newpage
+
+# Figures
+
+![**Figure 1**]()
+
+\newpage
+
+# Tables
+
+\newpage
