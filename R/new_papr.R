@@ -78,7 +78,9 @@ new_papr <- function() {
     "forcats",
     "targets",
     "tarchetypes",
-    "ragg"
+    "ragg",
+    "extrafont",
+    "quarto"
   )
   renv::init(restart = FALSE, bare = TRUE)
   renv::install(pkgs)
